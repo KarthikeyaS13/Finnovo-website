@@ -191,9 +191,9 @@ export default function Footer() {
         </div>
 
         {/* Bottom divider & Copyright */}
-        <div className="pt-4 border-t border-gray-100 dark:border-[#2B364D] flex flex-col md:flex-row items-center justify-between space-y-2 md:space-y-0">
+        <div className="pt-4 border-t border-gray-100 dark:border-[#2B364D] flex flex-col items-center md:items-start space-y-3">
           <p className="font-sans text-[11px] text-[#64748b] dark:text-[#94A3B8]">
-            &copy; 2024 FINNOVO&reg;. Precision in Financial Intelligence. All rights reserved.
+            &copy; 2026 FINNOVO&reg;. Precision in Financial Intelligence. All rights reserved.
           </p>
           <div className="flex space-x-6">
             <Link
