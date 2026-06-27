@@ -1,7 +1,24 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
+
+function parseTimeToMinutes(timeStr: string): number {
+  const [time, modifier] = timeStr.split(" ");
+  let [hours, minutes] = time.split(":").map(Number);
+  if (modifier === "PM" && hours !== 12) {
+    hours += 12;
+  }
+  if (modifier === "AM" && hours === 12) {
+    hours = 0;
+  }
+  return hours * 60 + minutes;
+}
+
+function parseDurationToMinutes(durationStr: string): number {
+  const numeric = parseInt(durationStr, 10);
+  return isNaN(numeric) ? 30 : numeric;
+}
 
 const countries = [
   { code: "+91", label: "🇮🇳 +91", name: "India", length: 10, placeholder: "98765 43210" },
@@ -28,12 +45,141 @@ export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
+  // Scheduler States
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [selectedTime, setSelectedTime] = useState<string | null>(null);
+  const [meetingDuration, setMeetingDuration] = useState("30 Minutes");
+  const [meetingMode, setMeetingMode] = useState("Google Meet");
+  const [currentMonth, setCurrentMonth] = useState(new Date());
+  const [existingBookings, setExistingBookings] = useState<any[]>([]);
+
+  const fetchBookings = async () => {
+    try {
+      const res = await axios.get("/api/submissions");
+      if (res.data && res.data.submissions) {
+        setExistingBookings(res.data.submissions);
+      }
+    } catch (err) {
+      console.error("Error fetching bookings:", err);
+    }
+  };
+
+  useEffect(() => {
+    fetchBookings();
+  }, []);
+
+  const timeSlots = [
+    "11:00 AM", "11:30 AM", "12:00 PM", "12:30 PM", "01:00 PM",
+    "02:00 PM", "02:30 PM", "03:00 PM", "03:30 PM", "04:00 PM", "04:30 PM",
+    "05:00 PM", "05:30 PM"
+  ];
+
   const activeCountry = countries.find(c => c.code === countryCode) || countries[0];
+
+  const getDaysInMonth = (date: Date) => {
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    const firstDay = new Date(year, month, 1).getDay();
+    const totalDays = new Date(year, month + 1, 0).getDate();
+    return { firstDay, totalDays };
+  };
+
+  const isPastDate = (day: number) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const dateToCheck = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day);
+    return dateToCheck < today;
+  };
+
+  const isWeekend = (day: number) => {
+    const dayOfWeek = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day).getDay();
+    return dayOfWeek === 0 || dayOfWeek === 6;
+  };
+
+  const isToday = (day: number) => {
+    const today = new Date();
+    return (
+      day === today.getDate() &&
+      currentMonth.getMonth() === today.getMonth() &&
+      currentMonth.getFullYear() === today.getFullYear()
+    );
+  };
+
+  const isSelected = (day: number) => {
+    return (
+      selectedDate !== null &&
+      day === selectedDate.getDate() &&
+      currentMonth.getMonth() === selectedDate.getMonth() &&
+      currentMonth.getFullYear() === selectedDate.getFullYear()
+    );
+  };
+
+  const handlePrevMonth = () => {
+    const prev = new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1);
+    const today = new Date();
+    if (prev.getFullYear() < today.getFullYear() || (prev.getFullYear() === today.getFullYear() && prev.getMonth() < today.getMonth())) {
+      return;
+    }
+    setCurrentMonth(prev);
+  };
+
+  const handleNextMonth = () => {
+    const next = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1);
+    setCurrentMonth(next);
+  };
+
+  const isSlotUnavailable = (slot: string) => {
+    if (!selectedDate) return false;
+
+    const slotStart = parseTimeToMinutes(slot);
+
+    // Disable past time slots if the selected date is today (based on IST)
+    const today = new Date();
+    const isToday = selectedDate.getDate() === today.getDate() &&
+                    selectedDate.getMonth() === today.getMonth() &&
+                    selectedDate.getFullYear() === today.getFullYear();
+    
+    if (isToday) {
+      const nowIstStr = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
+      const nowIst = new Date(nowIstStr);
+      const currentMinutes = nowIst.getHours() * 60 + nowIst.getMinutes();
+      
+      if (slotStart <= currentMinutes) {
+        return true;
+      }
+    }
+
+    const year = selectedDate.getFullYear();
+    const month = String(selectedDate.getMonth() + 1).padStart(2, '0');
+    const day = String(selectedDate.getDate()).padStart(2, '0');
+    const targetDateStr = `${year}-${month}-${day}`;
+
+    const dayBookings = existingBookings.filter(b => b.scheduledDate === targetDateStr && b.scheduledTime);
+    const slotDuration = parseDurationToMinutes(meetingDuration);
+    const slotEnd = slotStart + slotDuration;
+
+    for (const booking of dayBookings) {
+      const bookedStart = parseTimeToMinutes(booking.scheduledTime);
+      const bookedDuration = parseDurationToMinutes(booking.duration || "30 Minutes");
+      const bookedEnd = bookedStart + bookedDuration;
+
+      if (slotStart < bookedEnd && bookedStart < slotEnd) {
+        return true;
+      }
+    }
+
+    return false;
+  };
+
+  const isContactDetailsFilled =
+    formData.fullName.trim() !== "" &&
+    formData.companyName.trim() !== "" &&
+    formData.workEmail.trim() !== "" &&
+    phoneNumOnly.trim() !== "";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Client-side country-specific phone number validation
     const digits = phoneNumOnly.replace(/\D/g, "");
 
     if (!digits) {
@@ -53,13 +199,28 @@ export default function ContactPage() {
       }
     }
 
+    if (isContactDetailsFilled) {
+      if (!selectedDate || !selectedTime) {
+        setSubmitError("Please select a date and time slot for your consultation.");
+        return;
+      }
+      if (formData.primaryInterest === "" || formData.messageDetails.trim() === "") {
+        setSubmitError("Please select a primary interest and fill in the message details.");
+        return;
+      }
+    }
+
     setIsSubmitting(true);
     setSubmitError(null);
 
     const combinedPhoneNumber = `${countryCode} ${digits}`;
     const submissionData = {
       ...formData,
-      phoneNumber: combinedPhoneNumber
+      phoneNumber: combinedPhoneNumber,
+      scheduledDate: selectedDate ? `${selectedDate.getFullYear()}-${String(selectedDate.getMonth() + 1).padStart(2, '0')}-${String(selectedDate.getDate()).padStart(2, '0')}` : null,
+      scheduledTime: selectedTime,
+      duration: meetingDuration,
+      meetingMode: meetingMode
     };
 
     try {
@@ -75,11 +236,16 @@ export default function ContactPage() {
         messageDetails: ""
       });
       setPhoneNumOnly("");
+      setSelectedDate(null);
+      setSelectedTime(null);
+      setMeetingDuration("30 Minutes");
+      setMeetingMode("Google Meet");
 
-      // Clear the success screen after 5 seconds
+      fetchBookings();
+
       setTimeout(() => {
         setSubmitted(false);
-      }, 5000);
+      }, 7000);
     } catch (err: any) {
       const errMsg = err.response?.data?.error || err.message || "An unexpected error occurred.";
       setSubmitError(errMsg);
@@ -120,9 +286,9 @@ export default function ContactPage() {
                 <div className="w-16 h-16 bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-100 dark:border-emerald-800/30 text-emerald-600 dark:text-emerald-400 flex items-center justify-center rounded-full text-2xl font-bold animate-bounce">
                   ✓
                 </div>
-                <h3 className="font-display text-xl font-bold text-secondary dark:text-[#F8FAFC]">Request Submitted Successfully</h3>
-                <p className="font-sans text-xs text-gray-400 dark:text-[#94A3B8] max-w-sm">
-                  Our systems have queued your request. A solutions specialist will reach out to you at the provided email address within our 2-hour SLA window.
+                <h3 className="font-display text-xl font-bold text-secondary dark:text-[#F8FAFC]">Consultation Scheduled Successfully</h3>
+                <p className="font-sans text-xs text-gray-500 dark:text-[#94A3B8] max-w-sm">
+                  Our systems have queued your request. A calendar invitation has been sent to your work email address with the meeting details.
                 </p>
               </div>
             ) : (
@@ -215,7 +381,7 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                {/* Primary Interest Dropdown matching official guidelines */}
+                {/* Primary Interest Dropdown */}
                 <div className="space-y-2">
                   <label className="font-sans text-sm font-bold text-[#565e74] dark:text-[#CBD5E1]" htmlFor="primaryInterest">
                     Primary Interest
@@ -230,7 +396,6 @@ export default function ContactPage() {
                     <option value="" disabled className="dark:bg-[#1C2740]">Select an area of focus</option>
                     <option value="yfy.ai" className="dark:bg-[#1C2740]">yfy.ai</option>
                     <option value="rekrutiq.io" className="dark:bg-[#1C2740]">rekrutiq.io</option>
-                    <option value="Custom AI Consulting" className="dark:bg-[#1C2740]">Custom AI Consulting</option>
                   </select>
                 </div>
 
@@ -250,25 +415,201 @@ export default function ContactPage() {
                   />
                 </div>
 
-                {/* Submit button & disclaimer */}
-                <div className="space-y-4 pt-2">
-                  {submitError && (
-                    <p className="font-sans text-xs text-red-500 font-bold bg-red-50 dark:bg-red-950/20 border border-red-100 dark:border-red-900/30 px-4 py-2.5 rounded-xl">
-                      ⚠️ {submitError}
-                    </p>
-                  )}
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="font-sans text-sm md:text-base font-bold bg-[#0f172a] dark:bg-[#F8FAFC] text-white dark:text-[#0b1c30] px-8 py-3.5 rounded-full hover:bg-primary dark:hover:bg-primary dark:hover:text-white transition-colors inline-flex items-center space-x-2 shadow-md cursor-pointer premium-btn-hover disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    <span>{isSubmitting ? "Submitting..." : "Submit Request"}</span>
-                    <span>&rarr;</span>
-                  </button>
-                  <p className="font-sans text-xs text-gray-400 dark:text-[#94A3B8] leading-normal">
-                    By submitting this form, you agree to our privacy protocols.
-                  </p>
+                {/* Scheduler Container */}
+                <div
+                  className={`transition-all duration-700 ease-in-out overflow-hidden ${isContactDetailsFilled ? "max-h-[1500px] opacity-100 mt-8" : "max-h-0 opacity-0 pointer-events-none"
+                    }`}
+                >
+                  <div className="w-full bg-[#f8f9ff] dark:bg-[#11192B] border border-gray-100 dark:border-[#2B364D] rounded-[24px] p-5 md:p-6 shadow-sm">
+                    {/* Header */}
+                    <div className="flex items-center space-x-2 border-b border-gray-200/50 dark:border-[#2B364D] pb-3 mb-4">
+                      <span className="w-2.5 h-2.5 bg-[#E9B615] rounded-full animate-pulse-subtle" />
+                      <h3 className="font-display text-sm font-bold text-secondary dark:text-[#F8FAFC]">
+                        Schedule a Consultation
+                      </h3>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-12 gap-5 items-start">
+                      {/* Left Side: Calendar */}
+                      <div className="md:col-span-5 border-r-0 md:border-r border-gray-200/50 dark:border-[#2B364D] md:pr-5">
+                        {/* Month navigation */}
+                        <div className="flex justify-between items-center mb-3">
+                          <span className="font-sans text-xs font-bold text-secondary dark:text-[#F8FAFC]">
+                            {currentMonth.toLocaleString('default', { month: 'long', year: 'numeric' })}
+                          </span>
+                          <div className="flex space-x-1">
+                            <button
+                              type="button"
+                              onClick={handlePrevMonth}
+                              className="p-1 rounded-md hover:bg-gray-200/50 dark:hover:bg-[#1C2740] text-gray-500 dark:text-gray-400 transition-colors cursor-pointer"
+                            >
+                              &larr;
+                            </button>
+                            <button
+                              type="button"
+                              onClick={handleNextMonth}
+                              className="p-1 rounded-md hover:bg-gray-200/50 dark:hover:bg-[#1C2740] text-gray-500 dark:text-gray-400 transition-colors cursor-pointer"
+                            >
+                              &rarr;
+                            </button>
+                          </div>
+                        </div>
+
+                        {/* Weekday headers */}
+                        <div className="grid grid-cols-7 gap-1 text-center mb-1.5">
+                          {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map((day) => (
+                            <span key={day} className="font-sans text-[10px] font-bold text-gray-400 dark:text-[#94A3B8]">
+                              {day}
+                            </span>
+                          ))}
+                        </div>
+
+                        {/* Days grid */}
+                        <div className="grid grid-cols-7 gap-1">
+                          {Array.from({ length: getDaysInMonth(currentMonth).firstDay }).map((_, i) => (
+                            <div key={`offset-${i}`} />
+                          ))}
+                          {Array.from({ length: getDaysInMonth(currentMonth).totalDays }, (_, i) => i + 1).map((day) => {
+                            const past = isPastDate(day);
+                            const weekend = isWeekend(day);
+                            const today = isToday(day);
+                            const selected = isSelected(day);
+
+                            return (
+                              <button
+                                key={day}
+                                type="button"
+                                disabled={past}
+                                onClick={() => {
+                                  setSelectedDate(new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day));
+                                  setSelectedTime(null);
+                                }}
+                                className={`
+                                  h-7 text-xs font-mono rounded-lg flex items-center justify-center transition-all duration-200 cursor-pointer
+                                  ${past
+                                    ? 'text-gray-300 dark:text-gray-700 cursor-not-allowed'
+                                    : selected
+                                      ? 'bg-[#E9B615] text-[#08142D] font-bold shadow-sm'
+                                      : today
+                                        ? 'border border-[#E9B615]/70 text-[#E9B615] hover:bg-[#E9B615]/10 font-bold'
+                                        : weekend
+                                          ? 'text-gray-400/80 dark:text-gray-500/80 hover:bg-gray-200/50 dark:hover:bg-[#1C2740]'
+                                          : 'text-secondary dark:text-[#CBD5E1] hover:bg-gray-200/50 dark:hover:bg-[#1C2740]'
+                                  }
+                                `}
+                              >
+                                {day}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </div>
+
+                      {/* Right Side: Slots & Details */}
+                      <div className="md:col-span-7">
+                        {!selectedDate ? (
+                          <div className="h-full flex flex-col items-center justify-center text-center py-6 text-gray-400 dark:text-[#94A3B8] space-y-2">
+                            <span className="text-xl">📅</span>
+                            <p className="font-sans text-xs font-semibold">Select a date to view available time slots</p>
+                          </div>
+                        ) : (
+                          <div className="space-y-4 animate-fadeIn">
+                            {/* Time Slots */}
+                            <div className="space-y-2">
+                              <div className="flex justify-between items-center">
+                                <span className="font-sans text-xs font-bold text-secondary dark:text-[#F8FAFC]">
+                                  Available Time (IST)
+                                </span>
+
+                              </div>
+                              <div className="grid grid-cols-3 gap-1.5 max-h-[220px] overflow-y-auto pr-1">
+                                {timeSlots.map((slot, index) => {
+                                  const isSelected = selectedTime === slot;
+                                  const isUnavailable = isSlotUnavailable(slot);
+
+                                  return (
+                                    <button
+                                      key={slot}
+                                      type="button"
+                                      disabled={isUnavailable}
+                                      onClick={() => setSelectedTime(slot)}
+                                      style={{ animationDelay: `${index * 30}ms` }}
+                                      className={`
+                                        py-1.5 px-2 text-[11px] font-mono font-medium rounded-full border transition-all duration-200 animate-slideUp cursor-pointer
+                                        ${isUnavailable
+                                          ? 'bg-gray-100/50 dark:bg-[#161F33] border-gray-100 dark:border-gray-800/80 text-gray-300 dark:text-gray-600 cursor-not-allowed opacity-40'
+                                          : isSelected
+                                            ? 'bg-[#E9B615] text-[#08142D] border-[#E9B615] shadow-sm scale-[1.03] font-bold'
+                                            : 'bg-white dark:bg-[#1C2740] border-gray-200 dark:border-[#2B364D] text-secondary dark:text-[#CBD5E1] hover:border-[#E9B615]/50 hover:bg-[#E9B615]/5 hover:-translate-y-[1px]'
+                                        }
+                                      `}
+                                    >
+                                      {slot}
+                                    </button>
+                                  );
+                                })}
+                              </div>
+                            </div>
+
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Footer / Submit */}
+                    <div className="border-t border-gray-200/50 dark:border-[#2B364D] pt-4 mt-4 flex flex-col sm:flex-row justify-between items-center gap-3">
+                      <div className="text-left w-full sm:w-auto">
+                        {selectedDate && selectedTime ? (
+                          <p className="font-sans text-[11px] text-[#565e74] dark:text-[#CBD5E1]">
+                            Selected Slot: <strong className="text-secondary dark:text-[#F8FAFC]">{selectedDate.toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' })}</strong> at <strong className="text-secondary dark:text-[#F8FAFC]">{selectedTime}</strong>
+                          </p>
+                        ) : (
+                          <p className="font-sans text-[11px] text-gray-400 dark:text-[#94A3B8]">
+                            Please select a date and time to finish scheduling.
+                          </p>
+                        )}
+                      </div>
+
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="w-full sm:w-auto font-sans text-xs font-bold bg-[#08142D] dark:bg-[#F8FAFC] hover:bg-[#E9B615] dark:hover:bg-[#E9B615] text-[#F8FAFC] dark:text-[#08142D] hover:text-[#08142D] dark:hover:text-[#08142D] px-6 py-2.5 rounded-full transition-all duration-300 inline-flex justify-center items-center space-x-2 shadow-sm disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                      >
+                        <span>{isSubmitting ? "Scheduling..." : "Schedule Now"}</span>
+                        <span>&rarr;</span>
+                      </button>
+                    </div>
+                  </div>
                 </div>
+
+                {/* Normal Submit Button (hidden when details are filled so scheduler submit button takes over) */}
+                {!isContactDetailsFilled && (
+                  <div className="space-y-4 pt-2">
+                    {submitError && (
+                      <p className="font-sans text-xs text-red-500 font-bold bg-red-50 dark:bg-red-950/20 border border-red-100 dark:border-red-900/30 px-4 py-2.5 rounded-xl">
+                        ⚠️ {submitError}
+                      </p>
+                    )}
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="font-sans text-sm md:text-base font-bold bg-[#0f172a] dark:bg-[#F8FAFC] text-white dark:text-[#0b1c30] px-8 py-3.5 rounded-full hover:bg-primary dark:hover:bg-primary dark:hover:text-white transition-colors inline-flex items-center space-x-2 shadow-md cursor-pointer premium-btn-hover disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      <span>{isSubmitting ? "Submitting..." : "Submit Request"}</span>
+                      <span>&rarr;</span>
+                    </button>
+                    <p className="font-sans text-xs text-gray-400 dark:text-[#94A3B8] leading-normal">
+                      By submitting this form, you agree to our privacy protocols.
+                    </p>
+                  </div>
+                )}
+
+                {/* Show error in scheduler mode at the bottom if scheduler is active */}
+                {isContactDetailsFilled && submitError && (
+                  <p className="font-sans text-xs text-red-500 font-bold bg-red-50 dark:bg-red-950/20 border border-red-100 dark:border-red-900/30 px-4 py-2.5 rounded-xl mt-4">
+                    ⚠️ {submitError}
+                  </p>
+                )}
               </form>
             )}
           </div>
@@ -279,9 +620,6 @@ export default function ContactPage() {
               <div className="flex justify-between items-center">
                 <span className="font-mono text-[11px] font-bold text-primary dark:text-primary tracking-wider uppercase">
                   Direct Contact
-                </span>
-                <span className="bg-indigo-50 dark:bg-indigo-950/30 text-primary dark:text-primary border border-indigo-100 dark:border-indigo-800/30 font-mono text-[10px] font-bold px-2 py-0.5 rounded">
-                  SLA &lt; 2hrs
                 </span>
               </div>
               <div className="space-y-3">

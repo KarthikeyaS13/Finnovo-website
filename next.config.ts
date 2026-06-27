@@ -3,10 +3,8 @@ import path from "path";
 
 const nextConfig: NextConfig = {
   /* config options here */
-  experimental: {
-    turbo: {
-      root: path.join(__dirname),
-    }
+  turbopack: {
+    root: path.join(__dirname),
   }
 };
 

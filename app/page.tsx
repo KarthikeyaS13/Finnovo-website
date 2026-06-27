@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import Typewriter from "./components/Typewriter";
+import MagneticButton from "./components/MagneticButton";
 
 export default function Home() {
   // FAQ Accordion State
@@ -26,7 +28,7 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen bg-[#f8f9ff] dark:bg-[#0B1020]">
       {/* Hero Section */}
-      <section className="relative overflow-hidden pt-20 pb-8 md:pt-28 md:pb-12">
+      <section className="relative overflow-hidden pt-10 pb-8 md:pt-14 md:pb-12">
         {/* Background Gradients */}
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-200/20 dark:bg-indigo-900/10 rounded-full blur-3xl pointer-events-none -z-10" />
         <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-purple-200/10 dark:bg-purple-900/5 rounded-full blur-3xl pointer-events-none -z-10" />
@@ -43,8 +45,8 @@ export default function Home() {
             <h1 className="hero-heading reveal-element reveal-heading font-display text-4xl md:text-5xl lg:text-[52px] font-extrabold tracking-tight text-secondary dark:text-[#F8FAFC] leading-[1.1]">
               Agentic AI &amp; <br />
               Custom Software for <br />
-              <span className="text-primary bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
-                Financial Operations
+              <span className="text-primary bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent text-3xl md:text-4xl lg:text-[42px] block mt-2">
+                <Typewriter words={["Financial Operations", "Payroll Automation", "HR Compliance", "Enterprise Intelligence"]} />
               </span>
             </h1>
             
@@ -58,18 +60,22 @@ export default function Home() {
             </p>
             
             <div className="hero-btns reveal-element reveal-button flex flex-wrap items-center gap-4 pt-2">
-              <Link
-                href="/contact"
-                className="font-sans text-sm font-bold bg-[#0f172a] dark:bg-[#F8FAFC] text-white dark:text-[#0b1c30] px-8 py-3.5 rounded-full hover:bg-primary dark:hover:bg-primary dark:hover:text-white shadow-md premium-btn-hover"
-              >
-                Book a Consultation
-              </Link>
-              <Link
-                href="/products"
-                className="font-sans text-sm font-bold border border-gray-300 dark:border-[#2B364D] text-secondary dark:text-[#F8FAFC] bg-white dark:bg-[#161F33] px-8 py-3.5 rounded-full hover:bg-gray-50 dark:hover:bg-[#1C2740] hover:border-gray-400 premium-btn-hover"
-              >
-                Explore Our AI Platforms
-              </Link>
+              <MagneticButton>
+                <Link
+                  href="/contact"
+                  className="font-sans text-sm font-bold bg-[#0f172a] dark:bg-[#F8FAFC] text-white dark:text-[#0b1c30] px-8 py-3.5 rounded-full hover:bg-primary dark:hover:bg-primary dark:hover:text-white shadow-md premium-btn-hover inline-block"
+                >
+                  Book a Consultation
+                </Link>
+              </MagneticButton>
+              <MagneticButton>
+                <Link
+                  href="/products"
+                  className="font-sans text-sm font-bold border border-gray-300 dark:border-[#2B364D] text-secondary dark:text-[#F8FAFC] bg-white dark:bg-[#161F33] px-8 py-3.5 rounded-full hover:bg-gray-50 dark:hover:bg-[#1C2740] hover:border-gray-400 premium-btn-hover inline-block"
+                >
+                  Explore Our AI Platforms
+                </Link>
+              </MagneticButton>
             </div>
           </div>
 
@@ -101,7 +107,7 @@ export default function Home() {
               </span>
             </div>
             <h2 className="reveal-element reveal-heading font-display text-3xl md:text-4xl font-extrabold text-secondary dark:text-[#F8FAFC] tracking-tight">
-              Judicious Technology. Absolute Confidentiality. Compliance by Design.
+              Enterprise-Grade Security and Compliance Built In
             </h2>
             <p className="reveal-element reveal-paragraph font-sans text-gray-500 dark:text-[#CBD5E1] text-sm md:text-base leading-relaxed">
               In the financial sector, generic AI tools fail due to rigid workflows and security risks. FINNOVO engineers bespoke financial software and Agentic AI designed to integrate directly with your legacy core banking systems and ERPs.
@@ -289,12 +295,14 @@ export default function Home() {
           </div>
           
           <div className="relative z-10 flex-shrink-0">
-            <Link
-              href="/contact"
-              className="font-sans text-sm font-bold bg-white dark:bg-[#0B1020] text-secondary dark:text-[#F8FAFC] hover:bg-primary dark:hover:bg-[#1C2740] hover:text-white dark:hover:text-[#F8FAFC] px-8 py-4 rounded-full transition-all duration-200 shadow-lg inline-block premium-btn-hover"
-            >
-              Book Consultation &rarr;
-            </Link>
+            <MagneticButton>
+              <Link
+                href="/contact"
+                className="font-sans text-sm font-bold bg-white dark:bg-[#0B1020] text-secondary dark:text-[#F8FAFC] hover:bg-primary dark:hover:bg-[#1C2740] hover:text-white dark:hover:text-[#F8FAFC] px-8 py-4 rounded-full transition-all duration-200 shadow-lg inline-block premium-btn-hover"
+              >
+                Book Consultation &rarr;
+              </Link>
+            </MagneticButton>
           </div>
         </div>
       </section>

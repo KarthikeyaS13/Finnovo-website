@@ -12,6 +12,10 @@ export interface Submission {
   primaryInterest: string;
   messageDetails: string;
   createdAt: string;
+  scheduledDate?: string;
+  scheduledTime?: string;
+  duration?: string;
+  meetingMode?: string;
 }
 
 let dbInstance: Database | null = null;
@@ -45,9 +49,27 @@ export async function getDbConnection() {
       phoneNumber TEXT,
       primaryInterest TEXT NOT NULL,
       messageDetails TEXT NOT NULL,
-      createdAt TEXT NOT NULL
+      createdAt TEXT NOT NULL,
+      scheduledDate TEXT,
+      scheduledTime TEXT,
+      duration TEXT,
+      meetingMode TEXT
     )
   `);
+
+  // Run migrations dynamically to support existing tables
+  try {
+    await dbInstance.exec(`ALTER TABLE submissions ADD COLUMN scheduledDate TEXT`);
+  } catch (e) {}
+  try {
+    await dbInstance.exec(`ALTER TABLE submissions ADD COLUMN scheduledTime TEXT`);
+  } catch (e) {}
+  try {
+    await dbInstance.exec(`ALTER TABLE submissions ADD COLUMN duration TEXT`);
+  } catch (e) {}
+  try {
+    await dbInstance.exec(`ALTER TABLE submissions ADD COLUMN meetingMode TEXT`);
+  } catch (e) {}
 
   return dbInstance;
 }
@@ -74,8 +96,8 @@ export async function addSubmission(submission: Omit<Submission, 'id' | 'created
     };
     
     await db.run(
-      `INSERT INTO submissions (id, fullName, companyName, workEmail, phoneNumber, primaryInterest, messageDetails, createdAt)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+      `INSERT INTO submissions (id, fullName, companyName, workEmail, phoneNumber, primaryInterest, messageDetails, createdAt, scheduledDate, scheduledTime, duration, meetingMode)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         newSubmission.id,
         newSubmission.fullName,
@@ -84,7 +106,11 @@ export async function addSubmission(submission: Omit<Submission, 'id' | 'created
         newSubmission.phoneNumber || null,
         newSubmission.primaryInterest,
         newSubmission.messageDetails,
-        newSubmission.createdAt
+        newSubmission.createdAt,
+        newSubmission.scheduledDate || null,
+        newSubmission.scheduledTime || null,
+        newSubmission.duration || null,
+        newSubmission.meetingMode || null
       ]
     );
     

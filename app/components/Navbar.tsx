@@ -47,14 +47,14 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-[#f8f9ff]/90 dark:bg-[#0B1020]/90 backdrop-blur-lg border-b border-gray-200/50 dark:border-[#2B364D]/50 py-3 shadow-sm"
-          : "bg-transparent py-5 shadow-none border-b-transparent backdrop-blur-none"
+          ? "bg-[#f8f9ff]/90 dark:bg-[#0B1020]/90 backdrop-blur-lg border-b border-gray-200/50 dark:border-[#2B364D]/50 pt-4 pb-2 shadow-sm"
+          : "bg-transparent pt-5 pb-3 shadow-none border-b-transparent backdrop-blur-none"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center group">
-          <Logo className="h-16 md:h-20" />
+          <Logo className="h-12 md:h-14 scale-[2.2] md:scale-[2.8] origin-left -ml-2" />
         </Link>
 
         {/* Desktop Navigation */}
@@ -162,7 +162,7 @@ export default function Navbar() {
 
       {/* Mobile Drawer */}
       <div
-        className={`md:hidden fixed inset-x-0 top-[60px] bg-white dark:bg-[#0B1020] border-b border-gray-100 dark:border-[#2B364D] shadow-xl transition-all duration-300 ease-in-out ${
+        className={`md:hidden fixed inset-x-0 top-[64px] bg-white dark:bg-[#0B1020] border-b border-gray-100 dark:border-[#2B364D] shadow-xl transition-all duration-300 ease-in-out ${
           mobileMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"
         }`}
       >
