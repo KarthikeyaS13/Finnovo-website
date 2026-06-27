@@ -52,79 +52,80 @@ export default function Footer() {
     <footer className="bg-white dark:bg-[#111827] border-t border-gray-150 dark:border-[#2B364D] py-6 md:py-8">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
 
-        {/* Top Section: Certified & Compliant Badges */}
-        <div className="border-b border-gray-100 dark:border-[#2B364D] pb-4 mb-6">
-          <span className="font-mono text-[10px] font-bold text-[#64748b] dark:text-[#94A3B8] tracking-wider uppercase block mb-2">
-            Certified & Compliant
-          </span>
-          <div className="flex flex-row flex-wrap sm:flex-nowrap gap-3">
-            {/* ISO 27001:2022 */}
-            <div className="flex flex-col items-center text-center bg-gray-50/50 dark:bg-[#161F33] border border-gray-100 dark:border-[#2B364D] rounded-xl p-2 w-28 hover:border-primary/20 dark:hover:border-primary/20 transition-all duration-300 overflow-hidden">
-              <div className="w-14 h-14 flex items-center justify-center bg-white dark:bg-[#0B1020] rounded-lg border border-gray-100 dark:border-[#2B364D] p-1 mb-1.5 overflow-hidden">
-                <ComplianceImage
-                  src="/2.png"
-                  fallbackText="ISO 27001"
-                  alt="ISO 27001:2022 Certificate"
-                />
+        {/* Main Footer Row */}
+        <div className="flex flex-col xl:flex-row items-center justify-between gap-8 xl:gap-4 mb-8">
+          
+          {/* Section 1: Certified & Compliant Badges */}
+          <div className="flex flex-col">
+            <span className="font-mono text-[10px] font-bold text-[#64748b] dark:text-[#94A3B8] tracking-wider uppercase block mb-2 text-center xl:text-left">
+              Certified & Compliant
+            </span>
+            <div className="flex flex-row flex-wrap sm:flex-nowrap gap-3 justify-center xl:justify-start">
+              {/* ISO 27001:2022 */}
+              <div className="flex flex-col items-center text-center bg-gray-50/50 dark:bg-[#161F33] border border-gray-100 dark:border-[#2B364D] rounded-xl p-2 w-28 hover:border-primary/20 dark:hover:border-primary/20 transition-all duration-300 overflow-hidden">
+                <div className="w-14 h-14 flex items-center justify-center bg-white dark:bg-[#0B1020] rounded-lg border border-gray-100 dark:border-[#2B364D] p-1 mb-1.5 overflow-hidden">
+                  <ComplianceImage
+                    src="/2.png"
+                    fallbackText="ISO 27001"
+                    alt="ISO 27001:2022 Certificate"
+                  />
+                </div>
+                <h5 className="font-mono text-[10px] font-bold text-secondary dark:text-[#F8FAFC] tracking-tight">
+                  ISO 27001:2022
+                </h5>
+                <p className="font-sans text-[9px] text-[#565e74] dark:text-[#CBD5E1] mt-0.5 leading-tight">
+                  Information Security
+                </p>
               </div>
-              <h5 className="font-mono text-[10px] font-bold text-secondary dark:text-[#F8FAFC] tracking-tight">
-                ISO 27001:2022
-              </h5>
-              <p className="font-sans text-[9px] text-[#565e74] dark:text-[#CBD5E1] mt-0.5 leading-tight">
-                Information Security
-              </p>
-            </div>
 
-            {/* ISO 27701:2019 */}
-            <div className="flex flex-col items-center text-center bg-gray-50/50 dark:bg-[#161F33] border border-gray-100 dark:border-[#2B364D] rounded-xl p-2 w-28 hover:border-primary/20 dark:hover:border-primary/20 transition-all duration-300 overflow-hidden">
-              <div className="w-14 h-14 flex items-center justify-center bg-white dark:bg-[#0B1020] rounded-lg border border-gray-100 dark:border-[#2B364D] p-1 mb-1.5 overflow-hidden">
-                <ComplianceImage
-                  src="/1.png"
-                  fallbackText="ISO 27701"
-                  alt="ISO 27701:2019 Certificate"
-                />
+              {/* ISO 27701:2019 */}
+              <div className="flex flex-col items-center text-center bg-gray-50/50 dark:bg-[#161F33] border border-gray-100 dark:border-[#2B364D] rounded-xl p-2 w-28 hover:border-primary/20 dark:hover:border-primary/20 transition-all duration-300 overflow-hidden">
+                <div className="w-14 h-14 flex items-center justify-center bg-white dark:bg-[#0B1020] rounded-lg border border-gray-100 dark:border-[#2B364D] p-1 mb-1.5 overflow-hidden">
+                  <ComplianceImage
+                    src="/1.png"
+                    fallbackText="ISO 27701"
+                    alt="ISO 27701:2019 Certificate"
+                  />
+                </div>
+                <h5 className="font-mono text-[10px] font-bold text-secondary dark:text-[#F8FAFC] tracking-tight">
+                  ISO 27701:2019
+                </h5>
+                <p className="font-sans text-[9px] text-[#565e74] dark:text-[#CBD5E1] mt-0.5 leading-tight">
+                  Privacy Management
+                </p>
               </div>
-              <h5 className="font-mono text-[10px] font-bold text-secondary dark:text-[#F8FAFC] tracking-tight">
-                ISO 27701:2019
-              </h5>
-              <p className="font-sans text-[9px] text-[#565e74] dark:text-[#CBD5E1] mt-0.5 leading-tight">
-                Privacy Management
-              </p>
-            </div>
 
-            {/* ISO 9001:2015 */}
-            <div className="flex flex-col items-center text-center bg-gray-50/50 dark:bg-[#161F33] border border-gray-100 dark:border-[#2B364D] rounded-xl p-2 w-28 hover:border-primary/20 dark:hover:border-primary/20 transition-all duration-300 overflow-hidden">
-              <div className="w-14 h-14 flex items-center justify-center bg-white dark:bg-[#0B1020] rounded-lg border border-gray-100 dark:border-[#2B364D] p-1 mb-1.5 overflow-hidden">
-                <ComplianceImage
-                  src="/3.png"
-                  fallbackText="ISO 9001"
-                  alt="ISO 9001:2015 Certificate"
-                />
+              {/* ISO 9001:2015 */}
+              <div className="flex flex-col items-center text-center bg-gray-50/50 dark:bg-[#161F33] border border-gray-100 dark:border-[#2B364D] rounded-xl p-2 w-28 hover:border-primary/20 dark:hover:border-primary/20 transition-all duration-300 overflow-hidden">
+                <div className="w-14 h-14 flex items-center justify-center bg-white dark:bg-[#0B1020] rounded-lg border border-gray-100 dark:border-[#2B364D] p-1 mb-1.5 overflow-hidden">
+                  <ComplianceImage
+                    src="/3.png"
+                    fallbackText="ISO 9001"
+                    alt="ISO 9001:2015 Certificate"
+                  />
+                </div>
+                <h5 className="font-mono text-[10px] font-bold text-secondary dark:text-[#F8FAFC] tracking-tight">
+                  ISO 90001:2015
+                </h5>
+                <p className="font-sans text-[9px] text-[#565e74] dark:text-[#CBD5E1] mt-0.5 leading-tight">
+                  Quality Management
+                </p>
               </div>
-              <h5 className="font-mono text-[10px] font-bold text-secondary dark:text-[#F8FAFC] tracking-tight">
-                ISO 90001:2015
-              </h5>
-              <p className="font-sans text-[9px] text-[#565e74] dark:text-[#CBD5E1] mt-0.5 leading-tight">
-                Quality Management
-              </p>
             </div>
           </div>
-        </div>
 
-        {/* Grid Section: Logo + Navigation Links */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 mb-6">
-          {/* Logo & Description */}
-          <div className="col-span-2 space-y-2">
+          {/* Section 2: Logo & Description */}
+          <div className="flex flex-col space-y-2 items-center xl:items-start text-center xl:text-left max-w-sm">
             <Link href="/" className="inline-block">
-              <Logo className="h-12 md:h-14 scale-[2.2] md:scale-[2.8] origin-left -ml-2" />
+              <Logo className="h-12 md:h-14 scale-[2.2] md:scale-[2.8] origin-center xl:origin-left -ml-2" />
             </Link>
-            <p className="text-[#565e74] dark:text-[#CBD5E1] text-[13px] max-w-sm font-sans leading-relaxed">
+            <p className="text-[#565e74] dark:text-[#CBD5E1] text-[13px] font-sans leading-relaxed">
               Precision in Financial Intelligence. Building the next generation of autonomous enterprise software for financial operations.
             </p>
           </div>
 
-          {/* Column 1: PLATFORM */}
-          <div className="space-y-2">
+          {/* Section 3: PLATFORM */}
+          <div className="flex flex-col space-y-2 items-center xl:items-start text-center xl:text-left">
             <h4 className="font-mono text-[10px] font-bold tracking-wider text-primary uppercase">
               Platform
             </h4>
@@ -148,8 +149,8 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 2: CORPORATE */}
-          <div className="space-y-2">
+          {/* Section 4: CORPORATE */}
+          <div className="flex flex-col space-y-2 items-center xl:items-start text-center xl:text-left">
             <h4 className="font-mono text-[10px] font-bold tracking-wider text-primary uppercase">
               Corporate
             </h4>
@@ -188,10 +189,11 @@ export default function Footer() {
               </li>
             </ul>
           </div>
+
         </div>
 
         {/* Bottom divider & Copyright */}
-        <div className="pt-4 border-t border-gray-100 dark:border-[#2B364D] flex flex-col items-center md:items-start space-y-3">
+        <div className="pt-4 border-t border-gray-100 dark:border-[#2B364D] flex flex-col md:flex-row items-center justify-between space-y-2 md:space-y-0">
           <p className="font-sans text-[11px] text-[#64748b] dark:text-[#94A3B8]">
             &copy; 2026 FINNOVO&reg;. Precision in Financial Intelligence. All rights reserved.
           </p>
