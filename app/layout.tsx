@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import Script from "next/script";
 import Navbar from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
 import ScrollReveal from "@/app/components/ScrollReveal";
@@ -57,6 +58,19 @@ export default function RootLayout({
             `,
           }}
         />
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-DNSNQMNHKP"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){window.dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-DNSNQMNHKP');
+          `}
+        </Script>
       </head>
       <body className="min-h-full flex flex-col overflow-x-hidden bg-[#f8f9ff] dark:bg-[#0B1020] text-[#0b1c30] dark:text-[#F8FAFC] selection:bg-indigo-100 selection:text-indigo-900 font-sans">
         <ScrollReveal />
