@@ -99,8 +99,8 @@ export default function TermsOfService() {
         <section>
           <h2 className="text-xl font-bold text-secondary dark:text-white mb-4">12. Contact Information</h2>
           <p className="mt-2"><strong>FinAcco</strong></p>
-          <p>Email: <a href="mailto:mail@finacco.in" className="text-primary hover:underline">mail@finacco.in</a></p>
-          <p>Website: <a href="https://finacco.in" className="text-primary hover:underline">finacco.in</a></p>
+          <p>Email: <a href="mailto:mail@finacco.in" className="text-primary hover:underline cursor-pointer">mail@finacco.in</a></p>
+          <p>Website: <a href="https://finacco.in" className="text-primary hover:underline cursor-pointer">finacco.in</a></p>
         </section>
       </div>
     </div>

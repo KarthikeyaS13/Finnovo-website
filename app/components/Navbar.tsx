@@ -48,20 +48,20 @@ export default function Navbar() {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
           ? "bg-[#f8f9ff]/90 dark:bg-[#0B1020]/90 backdrop-blur-lg border-b border-gray-200/50 dark:border-[#2B364D]/50 pt-4 pb-2 shadow-sm"
-          : "bg-transparent pt-5 pb-3 shadow-none border-b-transparent backdrop-blur-none"
+          : "bg-transparent dark:bg-[#0B1020] pt-5 pb-3 shadow-none border-b-transparent backdrop-blur-none"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center group">
-          <Logo className="h-12 md:h-14 scale-[2.2] md:scale-[2.8] origin-left -ml-2" />
+        <Link href="/" className="flex items-center group cursor-pointer overflow-hidden h-14 md:h-16 w-[180px] md:w-[240px]">
+          <Logo className="h-14 md:h-16 scale-[2.2] md:scale-[2.8] origin-left -ml-2 w-auto object-contain" />
         </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
           <Link
             href="/"
-            className={`font-sans text-sm font-semibold tracking-wide transition-colors ${
+            className={`font-sans text-sm font-semibold tracking-wide transition-colors cursor-pointer ${
               isActive("/")
                 ? "text-primary border-b-2 border-primary pb-1"
                 : "text-[#565e74] dark:text-[#CBD5E1] hover:text-secondary dark:hover:text-[#F8FAFC] pb-1"
@@ -71,7 +71,7 @@ export default function Navbar() {
           </Link>
           <Link
             href="/about"
-            className={`font-sans text-sm font-semibold tracking-wide transition-colors ${
+            className={`font-sans text-sm font-semibold tracking-wide transition-colors cursor-pointer ${
               isActive("/about")
                 ? "text-primary border-b-2 border-primary pb-1"
                 : "text-[#565e74] dark:text-[#CBD5E1] hover:text-secondary dark:hover:text-[#F8FAFC] pb-1"
@@ -81,7 +81,7 @@ export default function Navbar() {
           </Link>
           <Link
             href="/products"
-            className={`font-sans text-sm font-semibold tracking-wide transition-colors ${
+            className={`font-sans text-sm font-semibold tracking-wide transition-colors cursor-pointer ${
               isActive("/products")
                 ? "text-primary border-b-2 border-primary pb-1"
                 : "text-[#565e74] dark:text-[#CBD5E1] hover:text-secondary dark:hover:text-[#F8FAFC] pb-1"
@@ -91,7 +91,7 @@ export default function Navbar() {
           </Link>
           <Link
             href="/contact"
-            className={`font-sans text-sm font-semibold tracking-wide transition-colors ${
+            className={`font-sans text-sm font-semibold tracking-wide transition-colors cursor-pointer ${
               isActive("/contact")
                 ? "text-primary border-b-2 border-primary pb-1"
                 : "text-[#565e74] dark:text-[#CBD5E1] hover:text-secondary dark:hover:text-[#F8FAFC] pb-1"
@@ -131,7 +131,7 @@ export default function Navbar() {
         {/* Mobile menu button */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2 text-secondary dark:text-[#F8FAFC] hover:text-primary transition-colors focus:outline-none"
+          className="md:hidden p-2 text-secondary dark:text-[#F8FAFC] hover:text-primary transition-colors focus:outline-none cursor-pointer"
           aria-label="Toggle Menu"
         >
           <svg
@@ -170,7 +170,7 @@ export default function Navbar() {
           <Link
             href="/"
             onClick={() => setMobileMenuOpen(false)}
-            className={`font-sans text-base font-bold transition-colors ${
+            className={`font-sans text-base font-bold transition-colors cursor-pointer ${
               isActive("/") ? "text-primary" : "text-[#565e74] dark:text-[#CBD5E1] hover:text-secondary dark:hover:text-[#F8FAFC]"
             }`}
           >
@@ -179,7 +179,7 @@ export default function Navbar() {
           <Link
             href="/about"
             onClick={() => setMobileMenuOpen(false)}
-            className={`font-sans text-base font-bold transition-colors ${
+            className={`font-sans text-base font-bold transition-colors cursor-pointer ${
               isActive("/about") ? "text-primary" : "text-[#565e74] dark:text-[#CBD5E1] hover:text-secondary dark:hover:text-[#F8FAFC]"
             }`}
           >
@@ -188,7 +188,7 @@ export default function Navbar() {
           <Link
             href="/products"
             onClick={() => setMobileMenuOpen(false)}
-            className={`font-sans text-base font-bold transition-colors ${
+            className={`font-sans text-base font-bold transition-colors cursor-pointer ${
               isActive("/products") ? "text-primary" : "text-[#565e74] dark:text-[#CBD5E1] hover:text-secondary dark:hover:text-[#F8FAFC]"
             }`}
           >
@@ -197,7 +197,7 @@ export default function Navbar() {
           <Link
             href="/contact"
             onClick={() => setMobileMenuOpen(false)}
-            className={`font-sans text-base font-bold transition-colors ${
+            className={`font-sans text-base font-bold transition-colors cursor-pointer ${
               isActive("/contact") ? "text-primary" : "text-[#565e74] dark:text-[#CBD5E1] hover:text-secondary dark:hover:text-[#F8FAFC]"
             }`}
           >

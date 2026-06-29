@@ -26,7 +26,7 @@ export default function ProductsPage() {
         <div className="reveal-element reveal-button pt-2">
           <Link
             href="/contact"
-            className="font-sans text-sm font-bold bg-[#0f172a] dark:bg-[#F8FAFC] text-white dark:text-[#0b1c30] px-8 py-3.5 rounded-full hover:bg-primary dark:hover:bg-primary dark:hover:text-white transition-colors inline-block premium-btn-hover"
+            className="font-sans text-sm font-bold bg-[#0f172a] dark:bg-[#F8FAFC] text-white dark:text-[#0b1c30] px-8 py-3.5 rounded-full hover:bg-primary dark:hover:bg-primary dark:hover:text-white transition-colors inline-block premium-btn-hover cursor-pointer"
           >
             Book Consultation
           </Link>
@@ -40,13 +40,13 @@ export default function ProductsPage() {
             {/* Left: Description */}
             <div className="space-y-6 lg:col-span-5">
               <span className="reveal-element font-mono text-[10px] font-bold text-primary dark:text-primary bg-indigo-50 dark:bg-indigo-950/30 px-2.5 py-1 rounded">
-                YFY.AI • UNIFIED HRMS
+                YFY<sup className="font-sans text-[0.7em]">&reg;</sup>.AI • UNIFIED HRMS
               </span>
               <h2 className="reveal-element reveal-heading font-display text-3xl font-bold text-secondary dark:text-[#F8FAFC] tracking-tight">
                 A Unified AI-Powered HRMS Designed to Centralize Payroll
               </h2>
               <p className="reveal-element reveal-paragraph font-sans text-gray-500 dark:text-[#CBD5E1] text-sm md:text-base leading-relaxed">
-                yfy.ai acts as the single source of truth for your workforce, ensuring payroll accuracy and automated tax filing across multiple jurisdictions. It synchronizes employee rosters, dynamic timesheet entries, and tax registers with multi-entity financial ledgers.
+                yfy<sup className="font-sans text-[0.7em]">&reg;</sup>.ai acts as the single source of truth for your workforce, ensuring payroll accuracy and automated tax filing across multiple jurisdictions. It synchronizes employee rosters, dynamic timesheet entries, and tax registers with multi-entity financial ledgers.
               </p>
               <ul className="reveal-element space-y-3.5 text-xs text-secondary dark:text-[#F8FAFC] font-semibold">
                 {[
@@ -67,9 +67,9 @@ export default function ProductsPage() {
                   href="https://yfy.ai/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-sans text-xs font-bold bg-[#0f172a] dark:bg-[#F8FAFC] text-white dark:text-[#0b1c30] px-6 py-3 rounded-full hover:bg-primary dark:hover:bg-primary dark:hover:text-white transition-colors inline-block premium-btn-hover"
+                  className="font-sans text-xs font-bold bg-[#0f172a] dark:bg-[#F8FAFC] text-white dark:text-[#0b1c30] px-6 py-3 rounded-full hover:bg-primary dark:hover:bg-primary dark:hover:text-white transition-colors inline-block premium-btn-hover cursor-pointer"
                 >
-                  Visit yfy.ai website &rarr;
+                  Visit yfy<sup className="font-sans text-[0.7em]">&reg;</sup>.ai website &rarr;
                 </a>
               </div>
             </div>
@@ -123,7 +123,7 @@ export default function ProductsPage() {
             <div className="reveal-element reveal-image order-2 lg:order-1 flex justify-center animate-float-slow w-full">
               <div className="w-full max-w-[640px]">
                 <img
-                  src="/rekruitiq2.png"
+                  src="/rekruitq3.png"
                   alt="Rekrutiq ATS Mockup"
                   className="w-full h-auto object-contain rounded-3xl premium-img-hover cursor-pointer"
                 />
@@ -133,13 +133,13 @@ export default function ProductsPage() {
             {/* Right: Description */}
             <div className="order-1 lg:order-2 space-y-6">
               <span className="reveal-element font-mono text-[10px] font-bold text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-950/30 px-2.5 py-1 rounded">
-                REKRUTIQ.IO • AGENCY ATS &amp; CRM
+                REKRUTIQ<sup className="font-sans text-[0.7em]">&trade;</sup>.IO • AGENCY ATS &amp; CRM
               </span>
               <h2 className="reveal-element reveal-heading font-display text-3xl font-bold text-secondary dark:text-[#F8FAFC] tracking-tight">
                 An AI-Powered ATS &amp; CRM Built Specifically for Agencies
               </h2>
               <p className="reveal-element reveal-paragraph font-sans text-gray-500 dark:text-[#CBD5E1] text-sm md:text-base leading-relaxed">
-                rekrutiq.io features Gmail, Teams, and QuickBooks integrations, allowing recruiting teams to scale candidate sourcing, parse resumes, and manage client billing on a single screen.
+                rekrutiq<sup className="font-sans text-[0.7em]">&trade;</sup>.io features Gmail, Teams, and QuickBooks integrations, allowing recruiting teams to scale candidate sourcing, parse resumes, and manage client billing on a single screen.
               </p>
               <ul className="reveal-element space-y-3.5 text-xs text-secondary dark:text-[#F8FAFC] font-semibold">
                 {[
@@ -160,9 +160,9 @@ export default function ProductsPage() {
                   href="https://rekrutiq.io/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-sans text-xs font-bold bg-[#0f172a] dark:bg-[#F8FAFC] text-white dark:text-[#0b1c30] px-6 py-3 rounded-full hover:bg-purple-600 dark:hover:bg-purple-500 transition-colors inline-block premium-btn-hover"
+                  className="font-sans text-xs font-bold bg-[#0f172a] dark:bg-[#F8FAFC] text-white dark:text-[#0b1c30] px-6 py-3 rounded-full hover:bg-purple-600 dark:hover:bg-purple-500 transition-colors inline-block premium-btn-hover cursor-pointer"
                 >
-                  Visit rekrutiq.io website &rarr;
+                  Visit rekrutiq<sup className="font-sans text-[0.7em]">&trade;</sup>.io website &rarr;
                 </a>
               </div>
             </div>

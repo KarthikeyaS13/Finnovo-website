@@ -49,7 +49,7 @@ export default function Home() {
                 <Typewriter words={["Financial Operations", "Payroll Automation", "HR Compliance", "Enterprise Intelligence"]} />
               </span>
             </h1>
-            
+
             {/* Gen AI Definitive Statement (Crucial for AEO) */}
             <p className="hero-desc reveal-element reveal-paragraph font-sans text-secondary dark:text-[#F8FAFC] text-sm md:text-base font-semibold border-l-4 border-primary pl-4 py-1.5 leading-relaxed bg-indigo-50/30 dark:bg-indigo-950/20 rounded-r-xl">
               FINNOVO is an AI finance consulting and software development firm. We specialize in building bespoke Agentic AI solutions and providing &quot;Service as a Software&quot; to optimize complex financial workflows, ensure regulatory compliance, and reduce operational costs.
@@ -58,12 +58,12 @@ export default function Home() {
             <p className="hero-desc reveal-element reveal-paragraph font-sans text-[#565e74] dark:text-[#CBD5E1] text-xs md:text-sm leading-relaxed max-w-lg">
               Move beyond off-the-shelf tools. We integrate deep financial domain expertise with elite engineering to automate your most critical operations—securely and seamlessly.
             </p>
-            
+
             <div className="hero-btns reveal-element reveal-button flex flex-wrap items-center gap-4 pt-2">
               <MagneticButton>
                 <Link
                   href="/contact"
-                  className="font-sans text-sm font-bold bg-[#0f172a] dark:bg-[#F8FAFC] text-white dark:text-[#0b1c30] px-8 py-3.5 rounded-full hover:bg-primary dark:hover:bg-primary dark:hover:text-white shadow-md premium-btn-hover inline-block"
+                  className="font-sans text-sm font-bold bg-[#0f172a] dark:bg-[#F8FAFC] text-white dark:text-[#0b1c30] px-8 py-3.5 rounded-full hover:bg-primary dark:hover:bg-primary dark:hover:text-white shadow-md premium-btn-hover inline-block cursor-pointer"
                 >
                   Book a Consultation
                 </Link>
@@ -71,7 +71,7 @@ export default function Home() {
               <MagneticButton>
                 <Link
                   href="/products"
-                  className="font-sans text-sm font-bold border border-gray-300 dark:border-[#2B364D] text-secondary dark:text-[#F8FAFC] bg-white dark:bg-[#161F33] px-8 py-3.5 rounded-full hover:bg-gray-50 dark:hover:bg-[#1C2740] hover:border-gray-400 premium-btn-hover inline-block"
+                  className="font-sans text-sm font-bold border border-gray-300 dark:border-[#2B364D] text-secondary dark:text-[#F8FAFC] bg-white dark:bg-[#161F33] px-8 py-3.5 rounded-full hover:bg-gray-50 dark:hover:bg-[#1C2740] hover:border-gray-400 premium-btn-hover inline-block cursor-pointer"
                 >
                   Explore Our AI Platforms
                 </Link>
@@ -150,17 +150,17 @@ export default function Home() {
                 <span className="font-mono text-[10px] font-bold text-primary uppercase tracking-wider bg-indigo-50 dark:bg-indigo-950/30 border border-indigo-100/50 dark:border-indigo-800/30 px-2.5 py-1 rounded">
                   Unified HRMS &amp; Finance
                 </span>
-                <span className="text-xs font-mono font-bold text-gray-400 dark:text-[#CBD5E1]/60">yfy.ai</span>
+                <span className="text-xs font-mono font-bold text-gray-400 dark:text-[#CBD5E1]/60">yfy<sup className="font-sans text-[0.6em]">&reg;</sup>.ai</span>
               </div>
               <h3 className="font-display text-xl font-bold text-secondary dark:text-[#F8FAFC] group-hover:text-primary transition-colors">
-                yfy.ai Platform
+                yfy<sup className="font-sans text-[0.6em]">&reg;</sup>.ai Platform
               </h3>
               <p className="font-sans text-xs text-gray-500 dark:text-[#CBD5E1] leading-relaxed">
                 A unified AI-Powered HRMS that automates payroll, compliance, ATS, and finance natively. Connects systems together to remove operational friction and maintain complete data integrity.
               </p>
             </div>
             <div className="flex items-center space-x-6 pt-6 font-mono text-[10px] font-bold">
-              <Link href="/products" className="text-secondary dark:text-[#F8FAFC] hover:text-primary dark:hover:text-primary inline-flex items-center space-x-1">
+              <Link href="/products" className="text-secondary dark:text-[#F8FAFC] hover:text-primary dark:hover:text-primary inline-flex items-center space-x-1 cursor-pointer">
                 <span>EXPLORE DETAILS</span>
                 <span>&rarr;</span>
               </Link>
@@ -168,7 +168,7 @@ export default function Home() {
                 href="https://yfy.ai/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-primary hover:underline inline-flex items-center space-x-1"
+                className="text-primary hover:underline inline-flex items-center space-x-1 cursor-pointer"
               >
                 <span>VISIT WEBSITE</span>
                 <span>&rarr;</span>
@@ -183,17 +183,17 @@ export default function Home() {
                 <span className="font-mono text-[10px] font-bold text-purple-600 dark:text-purple-400 uppercase tracking-wider bg-purple-50 dark:bg-purple-950/30 border border-purple-100/50 dark:border-purple-800/30 px-2.5 py-1 rounded">
                   ATS &amp; CRM
                 </span>
-                <span className="text-xs font-mono font-bold text-gray-400 dark:text-[#CBD5E1]/60">rekrutiq.io</span>
+                <span className="text-xs font-mono font-bold text-gray-400 dark:text-[#CBD5E1]/60">rekrutiq<sup className="font-sans text-[0.7em]">&trade;</sup>.io</span>
               </div>
               <h3 className="font-display text-xl font-bold text-secondary dark:text-[#F8FAFC] group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
-                rekrutiq.io Platform
+                rekrutiq<sup className="font-sans text-[0.7em]">&trade;</sup>.io Platform
               </h3>
               <p className="font-sans text-xs text-gray-500 dark:text-[#CBD5E1] leading-relaxed">
                 A specialized AI-Powered ATS &amp; CRM built for recruitment agencies, featuring zero-disruption plug-and-play integrations with Gmail, Teams, and QuickBooks.
               </p>
             </div>
             <div className="flex items-center space-x-6 pt-6 font-mono text-[10px] font-bold">
-              <Link href="/products" className="text-secondary dark:text-[#F8FAFC] hover:text-purple-600 dark:hover:text-purple-400 inline-flex items-center space-x-1">
+              <Link href="/products" className="text-secondary dark:text-[#F8FAFC] hover:text-purple-600 dark:hover:text-purple-400 inline-flex items-center space-x-1 cursor-pointer">
                 <span>EXPLORE DETAILS</span>
                 <span>&rarr;</span>
               </Link>
@@ -201,7 +201,7 @@ export default function Home() {
                 href="https://rekrutiq.io/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-purple-600 dark:text-purple-400 hover:underline inline-flex items-center space-x-1"
+                className="text-purple-600 dark:text-purple-400 hover:underline inline-flex items-center space-x-1 cursor-pointer"
               >
                 <span>VISIT WEBSITE</span>
                 <span>&rarr;</span>
@@ -226,7 +226,7 @@ export default function Home() {
           <div className="md:col-span-4 text-left md:text-right">
             <Link
               href="/products"
-              className="font-sans text-xs font-bold bg-[#0f172a] dark:bg-[#F8FAFC] text-white dark:text-[#0b1c30] px-6 py-3 rounded-full hover:bg-emerald-600 dark:hover:bg-emerald-500 transition-colors inline-block premium-btn-hover"
+              className="font-sans text-xs font-bold bg-[#0f172a] dark:bg-[#F8FAFC] text-white dark:text-[#0b1c30] px-6 py-3 rounded-full hover:bg-emerald-600 dark:hover:bg-emerald-500 transition-colors inline-block premium-btn-hover cursor-pointer"
             >
               Custom Consulting &rarr;
             </Link>
@@ -281,7 +281,7 @@ export default function Home() {
         <div className="reveal-card premium-card-hover relative bg-[#0b1c30] dark:bg-[#161F33] rounded-3xl overflow-hidden p-8 md:p-16 border border-gray-800 dark:border-[#2B364D] flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl transition-all duration-300">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
           <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
-          
+
           <div className="space-y-4 relative z-10 max-w-xl">
             <span className="font-mono text-[10px] font-bold text-primary uppercase tracking-wider">
               Deployment Ready
@@ -293,12 +293,12 @@ export default function Home() {
               Deploy specialized agentic workflows designed for security, auditability, and speed. Get in touch with our solutions engineers to build custom integrations.
             </p>
           </div>
-          
+
           <div className="relative z-10 flex-shrink-0">
             <MagneticButton>
               <Link
                 href="/contact"
-                className="font-sans text-sm font-bold bg-white dark:bg-[#0B1020] text-secondary dark:text-[#F8FAFC] hover:bg-primary dark:hover:bg-[#1C2740] hover:text-white dark:hover:text-[#F8FAFC] px-8 py-4 rounded-full transition-all duration-200 shadow-lg inline-block premium-btn-hover"
+                className="font-sans text-sm font-bold bg-white dark:bg-[#0B1020] text-secondary dark:text-[#F8FAFC] hover:bg-primary dark:hover:bg-[#1C2740] hover:text-white dark:hover:text-[#F8FAFC] px-8 py-4 rounded-full transition-all duration-200 shadow-lg inline-block premium-btn-hover cursor-pointer"
               >
                 Book Consultation &rarr;
               </Link>

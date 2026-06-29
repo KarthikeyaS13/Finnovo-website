@@ -53,17 +53,17 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 md:px-12">
 
         {/* Main Footer Row */}
-        <div className="flex flex-col xl:flex-row items-center justify-between gap-8 xl:gap-4 mb-8">
+        <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between gap-12 lg:gap-8 mb-12 w-full">
           
-          {/* Section 1: Certified & Compliant Badges */}
-          <div className="flex flex-col">
-            <span className="font-mono text-[10px] font-bold text-[#64748b] dark:text-[#94A3B8] tracking-wider uppercase block mb-2 text-center xl:text-left">
+          {/* Column 1: Certified & Compliant Badges */}
+          <div className="flex flex-col lg:w-1/3">
+            <span className="font-mono text-[10px] font-bold text-[#64748b] dark:text-[#94A3B8] tracking-wider uppercase block mb-2 text-center lg:text-left">
               Certified & Compliant
             </span>
-            <div className="flex flex-row flex-wrap sm:flex-nowrap gap-3 justify-center xl:justify-start">
+            <div className="flex flex-row flex-wrap sm:flex-nowrap gap-3 justify-center lg:justify-start">
               {/* ISO 27001:2022 */}
-              <div className="flex flex-col items-center text-center bg-gray-50/50 dark:bg-[#161F33] border border-gray-100 dark:border-[#2B364D] rounded-xl p-2 w-28 hover:border-primary/20 dark:hover:border-primary/20 transition-all duration-300 overflow-hidden">
-                <div className="w-14 h-14 flex items-center justify-center bg-white dark:bg-[#0B1020] rounded-lg border border-gray-100 dark:border-[#2B364D] p-1 mb-1.5 overflow-hidden">
+              <div className="flex flex-col items-center text-center bg-gray-50/50 dark:bg-[#161F33] border border-gray-100 dark:border-[#2B364D] rounded-xl p-1.5 w-24 hover:border-primary/20 dark:hover:border-primary/20 transition-all duration-300 overflow-hidden">
+                <div className="w-12 h-12 flex items-center justify-center bg-white dark:bg-[#0B1020] rounded-lg border border-gray-100 dark:border-[#2B364D] p-1 mb-1 overflow-hidden">
                   <ComplianceImage
                     src="/2.png"
                     fallbackText="ISO 27001"
@@ -79,8 +79,8 @@ export default function Footer() {
               </div>
 
               {/* ISO 27701:2019 */}
-              <div className="flex flex-col items-center text-center bg-gray-50/50 dark:bg-[#161F33] border border-gray-100 dark:border-[#2B364D] rounded-xl p-2 w-28 hover:border-primary/20 dark:hover:border-primary/20 transition-all duration-300 overflow-hidden">
-                <div className="w-14 h-14 flex items-center justify-center bg-white dark:bg-[#0B1020] rounded-lg border border-gray-100 dark:border-[#2B364D] p-1 mb-1.5 overflow-hidden">
+              <div className="flex flex-col items-center text-center bg-gray-50/50 dark:bg-[#161F33] border border-gray-100 dark:border-[#2B364D] rounded-xl p-1.5 w-24 hover:border-primary/20 dark:hover:border-primary/20 transition-all duration-300 overflow-hidden">
+                <div className="w-12 h-12 flex items-center justify-center bg-white dark:bg-[#0B1020] rounded-lg border border-gray-100 dark:border-[#2B364D] p-1 mb-1 overflow-hidden">
                   <ComplianceImage
                     src="/1.png"
                     fallbackText="ISO 27701"
@@ -96,8 +96,8 @@ export default function Footer() {
               </div>
 
               {/* ISO 9001:2015 */}
-              <div className="flex flex-col items-center text-center bg-gray-50/50 dark:bg-[#161F33] border border-gray-100 dark:border-[#2B364D] rounded-xl p-2 w-28 hover:border-primary/20 dark:hover:border-primary/20 transition-all duration-300 overflow-hidden">
-                <div className="w-14 h-14 flex items-center justify-center bg-white dark:bg-[#0B1020] rounded-lg border border-gray-100 dark:border-[#2B364D] p-1 mb-1.5 overflow-hidden">
+              <div className="flex flex-col items-center text-center bg-gray-50/50 dark:bg-[#161F33] border border-gray-100 dark:border-[#2B364D] rounded-xl p-1.5 w-24 hover:border-primary/20 dark:hover:border-primary/20 transition-all duration-300 overflow-hidden">
+                <div className="w-12 h-12 flex items-center justify-center bg-white dark:bg-[#0B1020] rounded-lg border border-gray-100 dark:border-[#2B364D] p-1 mb-1 overflow-hidden">
                   <ComplianceImage
                     src="/3.png"
                     fallbackText="ISO 9001"
@@ -114,80 +114,85 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Section 2: Logo & Description */}
-          <div className="flex flex-col space-y-2 items-center xl:items-start text-center xl:text-left max-w-sm">
-            <Link href="/" className="inline-block">
-              <Logo className="h-12 md:h-14 scale-[2.2] md:scale-[2.8] origin-center xl:origin-left -ml-2" />
+          {/* Column 2: Logo & Description */}
+          <div className="flex flex-col space-y-3 items-center lg:items-start text-center lg:text-left lg:w-1/3 max-w-sm mx-auto lg:mx-0">
+            <Link href="/" className="inline-block cursor-pointer">
+              {/* Using restored sizing/scaling for the new logo */}
+              <Logo className="h-14 md:h-16 scale-[2.2] md:scale-[2.8] origin-center lg:origin-left -ml-2 lg:-mt-1 w-auto object-contain" />
             </Link>
             <p className="text-[#565e74] dark:text-[#CBD5E1] text-[13px] font-sans leading-relaxed">
               Precision in Financial Intelligence. Building the next generation of autonomous enterprise software for financial operations.
             </p>
           </div>
 
-          {/* Section 3: PLATFORM */}
-          <div className="flex flex-col space-y-2 items-center xl:items-start text-center xl:text-left">
-            <h4 className="font-mono text-[10px] font-bold tracking-wider text-primary uppercase">
-              Platform
-            </h4>
-            <ul className="space-y-1.5">
-              <li>
-                <Link
-                  href="/products"
-                  className="font-sans text-sm text-[#565e74] dark:text-[#CBD5E1] hover:text-secondary dark:hover:text-[#F8FAFC] transition-colors"
-                >
-                  Products
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/contact"
-                  className="font-sans text-sm text-[#565e74] dark:text-[#CBD5E1] hover:text-secondary dark:hover:text-[#F8FAFC] transition-colors"
-                >
-                  Contact
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Section 4: CORPORATE */}
-          <div className="flex flex-col space-y-2 items-center xl:items-start text-center xl:text-left">
-            <h4 className="font-mono text-[10px] font-bold tracking-wider text-primary uppercase">
-              Corporate
-            </h4>
-            <ul className="space-y-1.5">
-              <li>
-                <Link
-                  href="/about"
-                  className="font-sans text-sm text-[#565e74] dark:text-[#CBD5E1] hover:text-secondary dark:hover:text-[#F8FAFC] transition-colors"
-                >
-                  About
-                </Link>
-              </li>
-              <li>
-                <a
-                  href="https://www.linkedin.com/company/finnovo/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-sans text-sm text-[#565e74] dark:text-[#CBD5E1] hover:text-[#0b1c30] dark:hover:text-[#F8FAFC] transition-colors inline-flex items-center"
-                >
-                  LinkedIn
-                  <svg
-                    className="w-3.5 h-3.5 ml-1"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
+          {/* Column 3: Links */}
+          <div className="flex flex-col sm:flex-row gap-12 sm:gap-16 lg:w-1/3 justify-center lg:justify-end">
+            
+            {/* PLATFORM */}
+            <div className="flex flex-col space-y-2 items-center sm:items-start text-center sm:text-left">
+              <h4 className="font-mono text-[10px] font-bold tracking-wider text-primary uppercase">
+                Platform
+              </h4>
+              <ul className="space-y-1.5">
+                <li>
+                  <Link
+                    href="/products"
+                    className="font-sans text-sm text-[#565e74] dark:text-[#CBD5E1] hover:text-secondary dark:hover:text-[#F8FAFC] transition-colors cursor-pointer"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                    />
-                  </svg>
-                </a>
-              </li>
-            </ul>
+                    Products
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/contact"
+                    className="font-sans text-sm text-[#565e74] dark:text-[#CBD5E1] hover:text-secondary dark:hover:text-[#F8FAFC] transition-colors cursor-pointer"
+                  >
+                    Contact
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* CORPORATE */}
+            <div className="flex flex-col space-y-2 items-center sm:items-start text-center sm:text-left">
+              <h4 className="font-mono text-[10px] font-bold tracking-wider text-primary uppercase">
+                Corporate
+              </h4>
+              <ul className="space-y-1.5">
+                <li>
+                  <Link
+                    href="/about"
+                    className="font-sans text-sm text-[#565e74] dark:text-[#CBD5E1] hover:text-secondary dark:hover:text-[#F8FAFC] transition-colors cursor-pointer"
+                  >
+                    About
+                  </Link>
+                </li>
+                <li>
+                  <a
+                    href="https://www.linkedin.com/company/finnovo/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-sans text-sm text-[#565e74] dark:text-[#CBD5E1] hover:text-[#0b1c30] dark:hover:text-[#F8FAFC] transition-colors inline-flex items-center cursor-pointer"
+                  >
+                    LinkedIn
+                    <svg
+                      className="w-3.5 h-3.5 ml-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                      />
+                    </svg>
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
 
         </div>
@@ -200,13 +205,13 @@ export default function Footer() {
           <div className="flex space-x-6">
             <Link
               href="/privacy"
-              className="font-sans text-xs text-[#64748b] dark:text-[#94A3B8] hover:text-[#0b1c30] dark:hover:text-[#F8FAFC] transition-colors"
+              className="font-sans text-xs text-[#64748b] dark:text-[#94A3B8] hover:text-[#0b1c30] dark:hover:text-[#F8FAFC] transition-colors cursor-pointer"
             >
               Privacy Policy
             </Link>
             <Link
               href="/terms"
-              className="font-sans text-xs text-[#64748b] dark:text-[#94A3B8] hover:text-[#0b1c30] dark:hover:text-[#F8FAFC] transition-colors"
+              className="font-sans text-xs text-[#64748b] dark:text-[#94A3B8] hover:text-[#0b1c30] dark:hover:text-[#F8FAFC] transition-colors cursor-pointer"
             >
               Terms of Service
             </Link>

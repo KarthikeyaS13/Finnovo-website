@@ -629,7 +629,7 @@ export default function ContactPage() {
                   </h4>
                   <a
                     href="mailto:info@finnovo.io"
-                    className="text-secondary dark:text-[#F8FAFC] font-sans text-sm font-semibold hover:text-primary transition-colors"
+                    className="text-secondary dark:text-[#F8FAFC] font-sans text-sm font-semibold hover:text-primary transition-colors cursor-pointer"
                   >
                     info@finnovo.io
                   </a>
@@ -663,7 +663,7 @@ export default function ContactPage() {
                   href="https://maps.app.goo.gl/9VVKQsHhxvhiohUWA"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-mono text-[10px] font-bold text-secondary dark:text-[#F8FAFC] hover:text-primary inline-flex items-center space-x-1"
+                  className="font-mono text-[10px] font-bold text-secondary dark:text-[#F8FAFC] hover:text-primary inline-flex items-center space-x-1 cursor-pointer"
                 >
                   <span>VIEW ON MAPS</span>
                   <span>&rarr;</span>
@@ -685,7 +685,7 @@ export default function ContactPage() {
                   href="https://maps.app.goo.gl/r4aBeLS168rXMubH6"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-mono text-[10px] font-bold text-secondary dark:text-[#F8FAFC] hover:text-primary inline-flex items-center space-x-1"
+                  className="font-mono text-[10px] font-bold text-secondary dark:text-[#F8FAFC] hover:text-primary inline-flex items-center space-x-1 cursor-pointer"
                 >
                   <span>VIEW ON MAPS</span>
                   <span>&rarr;</span>

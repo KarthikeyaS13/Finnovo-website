@@ -90,8 +90,8 @@ export default function PrivacyPolicy() {
           <h2 className="text-xl font-bold text-secondary dark:text-white mb-4">11. Contact Us</h2>
           <p>If you have any questions regarding this Privacy Policy, please contact:</p>
           <p className="mt-2"><strong>FinAcco</strong></p>
-          <p>Email: <a href="mailto:legal@finacco.in" className="text-primary hover:underline">legal@finacco.in</a></p>
-          <p>Website: <a href="https://finacco.in" className="text-primary hover:underline">finacco.in</a></p>
+          <p>Email: <a href="mailto:legal@finacco.in" className="text-primary hover:underline cursor-pointer">legal@finacco.in</a></p>
+          <p>Website: <a href="https://finacco.in" className="text-primary hover:underline cursor-pointer">finacco.in</a></p>
         </section>
       </div>
     </div>
